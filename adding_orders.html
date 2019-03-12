@@ -1,0 +1,147 @@
+<!--http://localhost/websites/firebase/public/finding_orders.html?&uid=21&cus_name=rpsnaik&item_name=thali&item_count=3&price=180&stall1=vaos&scstall2=foodie&stall3=fortune&email=naik.rpsn@gmail.com&mobile=8309551486&hostel=BH3&block=B&room=903&position=5&priceadd=10&submitted=true-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet"> 
+    <style>
+     body{
+       background-color: #f1f1f1;
+       font-family: 'Nunito', sans-serif;
+     }
+    </style>
+</head>
+<body>
+    
+  <img id="imga" height="" src="./checkpoint.gif" style="text-align:center;width:100%;" alt="">
+    
+  <h3 id="title" style="text-align: center; margin-top:100px;">Loading...</h3>
+    
+<script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-database.js"></script>
+<script
+src="https://code.jquery.com/jquery-3.3.1.js"
+integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+crossorigin="anonymous"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCfDQPGxr-NEfBDOR-a-M3j8lN7bBCOcXY",
+    authDomain: "recipers-2019.firebaseapp.com",
+    databaseURL: "https://recipers-2019.firebaseio.com",
+    projectId: "recipers-2019",
+    storageBucket: "recipers-2019.appspot.com",
+    messagingSenderId: "635738732856"
+  };
+  firebase.initializeApp(config);
+</script>
+<script>
+  var Request = {
+    parameter: function(name) {
+      return this.parameters()[name];
+    },
+    parameters: function(uri) {
+      var i, parameter, params, query, result;
+      result = {};
+      if (!uri) {
+        uri = window.location.search;
+      }
+      if (uri.indexOf("?") === -1) {
+        return {};
+      }
+      query = uri.slice(1);
+      params = query.split("&");
+      i = 0;
+      while (i < params.length) {
+        parameter = params[i].split("=");
+        result[parameter[0]] = parameter[1];
+        i++;
+      }
+      return result;
+    }
+  };
+
+ 
+  var uid = Request.parameter('uid');
+  var cus_name = Request.parameter('cus_name');
+  var item_name = Request.parameter('item_name');
+  var item_count = Request.parameter('item_count');
+  var price = Request.parameter('price');
+  var stall1 = Request.parameter('stall1');
+  var stall2 = Request.parameter('stall2');
+  var stall3 = Request.parameter('stall3');
+  var email = Request.parameter('email');
+  var mobile = Request.parameter('mobile');
+  var hostel = Request.parameter('hostel');
+  var block = Request.parameter('block');
+  var room = Request.parameter('room');
+  var position = Request.parameter('position');
+  var priceadd = Request.parameter('priceadd');
+  var period = new Date();
+  var time = String(period);
+
+
+
+fun();
+function fun(){
+  $('#imga').hide();
+  var ref = firebase.database().ref('3/active/');
+  ref.on('value', gotdata, errData);
+}
+
+function gotdata(data){
+      var orders = data.val();
+      var ids = Object.keys(orders);
+      console.log("Length : "+ids.length);
+      if(ids.length > 1){
+        console.log("Exists");
+        var x = Math.floor((Math.random() * ids.length));
+        if(x == 0){
+          var index = ids[x+1];
+        }
+        else{
+          var index = ids[x];
+        }
+        console.log("Random Value : "+x);
+        var database = firebase.database();
+        var ref = database.ref('1/orders/'+uid);
+        ref.child(parseInt(position)).set({
+            uid : uid,
+            cus_name: cus_name,
+            email: email,
+            mobile: mobile,
+            item_name : item_name,
+            item_count : item_count,
+            price : price,
+            priceadd: priceadd,
+            allocatedto: index,
+            stall1 : stall1,
+            stall2 : stall2,
+            stall3 : stall3,
+            hostel: hostel,
+            block: block,
+            room: room,
+            status : "Yet to Deliver",
+            time: time,
+        });
+        $("#imga").show();
+        $('#title').text("Order Placed Successfully...");
+      }
+      else{
+        console.log("Sorry");
+        $(function(){
+          $('#title').html("<h3>Sorry...</h3>Delivery  agents are not availiable currently... We generally making our service between 5PM to 10PM Sorry, for the inconvenience");
+          $("#imga").hide();
+        })
+      }
+  }
+  
+  function errData(err){
+      console.log(err);
+  }
+</script>
+</body>
+</html>

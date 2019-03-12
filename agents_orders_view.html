@@ -1,0 +1,379 @@
+<!--https://recipers-2019.firebaseapp.com/adding_orders.html?&uid=23&cus_name=rpsnaik&item_name=thali&item_count=3&price=180&stall1=vascos&stall2=foodie&stall3=fortune&email=naik.rpsn@gmail.com&mobile=8309551486&hostel=BH3&block=B&room=903&position=5&submitted=true-->
+<!--
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet"> 
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function(){
+            $('.collapsible').collapsible();
+        });
+    </script>
+</head>
+<body>
+<style>
+    body{
+        font-family:sans-serif;
+        padding:5px;
+        font-family: 'Nunito', sans-serif;
+    }
+    p{
+        padding:5px;
+    }
+</style>
+
+<h4 style="text-align:center;">Delivery Items</h4>
+<p style="text-align:center;">Waiting for the Delivery items...</p>
+
+<p id="orders">  
+      <div class="progress">
+         <div class="indeterminate blue"></div> 
+      </div>
+
+</p>
+
+
+    
+<script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-database.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCfDQPGxr-NEfBDOR-a-M3j8lN7bBCOcXY",
+    authDomain: "recipers-2019.firebaseapp.com",
+    databaseURL: "https://recipers-2019.firebaseio.com",
+    projectId: "recipers-2019",
+    storageBucket: "recipers-2019.appspot.com",
+    messagingSenderId: "635738732856"
+  };
+  firebase.initializeApp(config);
+</script>
+<script>
+
+  
+
+
+  var Request = {
+    parameter: function(name) {
+      return this.parameters()[name];
+    },
+    parameters: function(uri) {
+      var i, parameter, params, query, result;
+      result = {};
+      if (!uri) {
+        uri = window.location.search;
+      }
+      if (uri.indexOf("?") === -1) {
+        return {};
+      }
+      query = uri.slice(1);
+      params = query.split("&");
+      i = 0;
+      while (i < params.length) {
+        parameter = params[i].split("=");
+        result[parameter[0]] = parameter[1];
+        i++;
+      }
+      return result;
+    }
+  };
+
+
+
+  var aid = Request.parameter('aid');
+/*
+  var cus_name = Request.parameter('cus_name');
+  var item_name = Request.parameter('item_name');
+  var item_count = Request.parameter('item_count');
+  var price = Request.parameter('price');
+  var stall1 = Request.parameter('stall1');
+  var stall2 = Request.parameter('stall2');
+  var stall3 = Request.parameter('stall3');
+  var email = Request.parameter('email');
+  var mobile = Request.parameter('mobile');
+  var hostel = Request.parameter('hostel');
+  var block = Request.parameter('block');
+  var room = Request.parameter('room');
+  var position = Request.parameter('position');
+*/
+
+funtest();
+function funtest(){
+    var ref = firebase.database().ref('1/orders/');
+    ref.on('value', gotdatatest, errDatatest);
+  }
+
+  function gotdatatest(data){
+      var orders = data.val();
+      var ids = Object.keys(orders);
+      for(var i = 0; i<ids.length; i++){
+          var uid = ids[i];
+          var ref23 = firebase.database().ref('1/orders/'+uid+'/');
+          ref23.on('value', gotdata12, errDatatest);
+      }
+  }
+  
+  function gotdata12(data){
+    var ordersindeed = data.val();
+    var idsiindeed = Object.keys(ordersindeed);
+    for(var i = 1; i<= idsiindeed.length; i++){
+      
+      var getneed = idsiindeed[i];
+       console.log("Need : "+ ordersindeed[getneed]['allocatedto']);
+       if(aid === ordersindeed[getneed]['allocatedto']){
+        var item_name = ordersindeed[getneed]['item_name'];
+        var cus_name = ordersindeed[getneed]['cus_name'];
+        var item_count = ordersindeed[getneed]['item_count'];
+        var mobile = ordersindeed[getneed]['mobile'];
+        var email = ordersindeed[getneed]['email'];
+        var price = ordersindeed[getneed]['price'];
+        var stalls = "1."+ordersindeed[getneed]['stall1']+"<br>"+"2."+ordersindeed[getneed]['stall2']+"<br>"+"3."+ordersindeed[getneed]['stall3']+"<br>";
+        var status = ordersindeed[getneed]['status'];
+        var uid = ordersindeed[getneed]['uid'];  
+        var address = ordersindeed[getneed]['hostel']+" "+ordersindeed[getneed]['block']+" "+ordersindeed[getneed]['room'];
+        $("#orders").append('<div class="row"><div class="col s12 m6"><div class="card cyan darken-4 white-text"><div class="card-content white-text"><span class="card-title"><i class="material-icons">room_service</i> '+item_name+'<span class="new badge blue" data-badge-caption="">Quantity : '+item_count+'</span>'+'</span><p>Name : '+cus_name+'<br>Mobile Number : '+mobile+'<br>Email ID : '+email+'<br>Stall Preferences : <br>'+stalls+'<br>Status : '+status+'<br>Address : '+address+'</p></div><div class="card-action"><a class="" style="font-weight:700" href="#">Payable Amount : '+price+'INR'+'</a><a href="./order_done.html?uid='+ordersindeed[getneed]['uid']+'&pos='+getneed+'&priceadd='+ordersindeed[getneed]['priceadd']+'&aid='+aid+'"><button class="btn">Order Done</button></a></div></div>');
+        $('.progress').hide();
+       }
+       else{
+         $("#orders").text("Currently No Orders....");
+       }
+    }
+  }
+
+  function errDatatest(err){
+      console.log(err);
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  //fun();
+  /*
+  function fun(){
+    var ref = firebase.database().ref('1/orders/'+uid);
+    ref.on('value', gotdata, errData);
+  }
+
+
+  function gotdata(data){
+      var orders = data.val();
+      var ids = Object.keys(orders);
+      for(var i=1;i<ids.length;i++){
+          console.log(i);
+          var ref2 = firebase.database().ref('1/orders/'+uid+'/'+i);
+          ref2.on('value', gotdata1, errData);
+      }
+      
+  }
+
+  function gotdata1(data){
+      var ordersSublist = data.val();
+      var keys2 = Object.keys(ordersSublist);
+      var item_name = ordersSublist['item_name'];
+      var cus_name = ordersSublist['cus_name'];
+      var item_count = ordersSublist['item_count'];
+      var mobile = ordersSublist['mobile'];
+      var email = ordersSublist['email'];
+      var price = ordersSublist['price'];
+      var stalls = "1."+ordersSublist['stall1']+"<br>"+"2."+ordersSublist['stall2']+"<br>"+"3."+ordersSublist['stall3']+"<br>";
+      var status = ordersSublist['status'];
+      var uid = ordersSublist['uid'];  
+      var address = ordersSublist['hostel']+" "+ordersSublist['block']+" "+ordersSublist['room'];
+      $("#orders").append('<div class="row"><div class="col s12 m6"><div class="card cyan darken-4 white-text"><div class="card-content white-text"><span class="card-title"><i class="material-icons">room_service</i> '+item_name+'<span class="new badge blue" data-badge-caption="">Quantity : '+item_count+'</span>'+'</span><p>Name : '+cus_name+'<br>Mobile Number : '+mobile+'<br>Email ID : '+email+'<br>Stall Preferences : <br>'+stalls+'<br>Status : '+status+'<br>Address : '+address+'</p></div><div class="card-action"><a class="" style="font-weight:700" href="#">Payable Amount : '+price+'INR'+'</a><button class="btn">Cancel</button></div></div>');
+      $('.progress').hide();
+  }
+
+
+  function errData(err){
+      console.log(err);
+  }
+
+  */
+
+  
+  
+</script>
+</body>
+</html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+-->
+
+
+<!--https://recipers-2019.firebaseapp.com/adding_orders.html?&uid=23&cus_name=rpsnaik&item_name=thali&item_count=3&price=180&stall1=vascos&stall2=foodie&stall3=fortune&email=naik.rpsn@gmail.com&mobile=8309551486&hostel=BH3&block=B&room=903&position=5&submitted=true-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet"> 
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function(){
+            $('.collapsible').collapsible();
+        });
+    </script>
+</head>
+<body>
+<style>
+    body{
+        font-family:sans-serif;
+        padding:5px;
+        font-family: 'Nunito', sans-serif;
+    }
+    p{
+        padding:5px;
+    }
+</style>
+
+<h4 style="text-align:center;">Delivery Items</h4>
+<p style="text-align:center;">Waiting for the Delivery items...</p>
+
+<p id="orders">  
+      <div class="progress">
+         <div class="indeterminate blue"></div> 
+      </div>
+
+</p>
+
+
+    
+<script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-database.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCfDQPGxr-NEfBDOR-a-M3j8lN7bBCOcXY",
+    authDomain: "recipers-2019.firebaseapp.com",
+    databaseURL: "https://recipers-2019.firebaseio.com",
+    projectId: "recipers-2019",
+    storageBucket: "recipers-2019.appspot.com",
+    messagingSenderId: "635738732856"
+  };
+  firebase.initializeApp(config);
+</script>
+<script>
+
+  
+
+
+  var Request = {
+    parameter: function(name) {
+      return this.parameters()[name];
+    },
+    parameters: function(uri) {
+      var i, parameter, params, query, result;
+      result = {};
+      if (!uri) {
+        uri = window.location.search;
+      }
+      if (uri.indexOf("?") === -1) {
+        return {};
+      }
+      query = uri.slice(1);
+      params = query.split("&");
+      i = 0;
+      while (i < params.length) {
+        parameter = params[i].split("=");
+        result[parameter[0]] = parameter[1];
+        i++;
+      }
+      return result;
+    }
+  };
+
+
+
+  var aid = Request.parameter('aid');
+  
+
+  fun();
+  function fun(){
+    var ref = firebase.database().ref('1/orders/');
+    ref.on('value', gotdata, errData);
+  }
+
+  function gotdata(data){
+      var orders = data.val();
+      var ids = Object.keys(orders);
+      for(var i = 0; i < ids.length; i++){
+        //console.log(ids[i]);
+        var ref1 = firebase.database().ref('1/orders/'+ids[i]);
+        ref1.on('value', gotdata1, errData);
+      }
+      
+  }
+
+  function gotdata1(data){
+    var statuscheck = false;
+    var orders1 = data.val();
+    var ids1 = Object.keys(orders1);
+    for(var j = 1; j < ids1.length; j++){
+        console.log(ids1[j]);
+        var i = ids1[j];
+      if(aid == orders1[i]['allocatedto']){
+        statuscheck = true;
+        var ordersSublist = data.val();
+        var keys2 = Object.keys(ordersSublist);
+        var item_name = orders1[i]['item_name'];
+        var cus_name = orders1[i]['cus_name'];
+        var item_count = orders1[i]['item_count'];
+        var mobile = orders1[i]['mobile'];
+        var email = orders1[i]['email'];
+        var price = orders1[i]['price'];
+        var stalls = "1."+orders1[i]['stall1']+"<br>"+"2."+orders1[i]['stall2']+"<br>"+"3."+orders1[i]['stall3']+"<br>";
+        var status = orders1[i]['status'];
+        var uid = orders1[i]['uid'];  
+        var address = orders1[i]['hostel']+" "+orders1[i]['block']+" "+orders1[i]['room'];
+        $("#orders").append('<div class="row"><div class="col s12 m6"><div class="card cyan darken-4 white-text"><div class="card-content white-text"><span class="card-title"><i class="material-icons">room_service</i> '+item_name+'<span class="new badge blue" data-badge-caption="">Quantity : '+item_count+'</span>'+'</span><p>Name : '+cus_name+'<br>Mobile Number : '+mobile+'<br>Email ID : '+email+'<br>Stall Preferences : <br>'+stalls+'<br>Status : '+status+'<br>Address : '+address+'</p><p>Order Placed at : '+orders1[i]['time']+'</p><p>Order ID : '+orders1[i]['uid']+i+'</p></div><div class="card-action"><a class="" style="font-weight:700" href="#">Payable Amount : '+price+'INR'+'</a><a href="./order_done.html?uid='+orders1[i]['uid']+'&pos='+i+'&priceadd='+orders1[i]['priceadd']+'&aid='+aid+'"><button class="btn">Order Done</button></a></div></div>');
+        $('.progress').hide();
+      }
+    }
+      
+  }
+
+  function errData(err){
+      console.log(err);
+  }
+
+
+
+
+
+
+
+
+  
+  
+</script>
+</body>
+</html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>

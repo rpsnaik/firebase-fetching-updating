@@ -1,0 +1,174 @@
+
+<!--https://recipers-2019.firebaseapp.com/adding_orders.html?&uid=23&cus_name=rpsnaik&item_name=thali&item_count=3&price=180&stall1=vascos&stall2=foodie&stall3=fortune&email=naik.rpsn@gmail.com&mobile=8309551486&hostel=BH3&block=B&room=903&position=5&submitted=true-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet"> 
+    <style>
+      body{
+        font-family: 'Nunito', sans-serif;
+      }
+    </style>
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function(){
+            $('.collapsible').collapsible();
+        });
+    </script>
+</head>
+<body>
+<style>
+    body{
+        padding:5px;
+    }
+    p{
+        padding:5px;
+    }
+</style>
+
+<h4 id="stat" style="text-align:center;">Are you sure to cancel this order</h4>
+
+<p style="text-align:center;" id="orders">  
+      <div id="boxes" class="row">
+        <div class="col s6 center-align">
+          <button onclick="fun()" class="blue waves-effect btn">Yes</button>
+        </div>
+        <div class="col s6 center-align">
+          <button onclick="javascript:history.go(-1)" class="red btn">No</button>
+        </div>
+      </div>
+</p>
+
+
+    
+<script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-database.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCfDQPGxr-NEfBDOR-a-M3j8lN7bBCOcXY",
+    authDomain: "recipers-2019.firebaseapp.com",
+    databaseURL: "https://recipers-2019.firebaseio.com",
+    projectId: "recipers-2019",
+    storageBucket: "recipers-2019.appspot.com",
+    messagingSenderId: "635738732856"
+  };
+  firebase.initializeApp(config);
+</script>
+<script>
+
+  
+
+
+  var Request = {
+    parameter: function(name) {
+      return this.parameters()[name];
+    },
+    parameters: function(uri) {
+      var i, parameter, params, query, result;
+      result = {};
+      if (!uri) {
+        uri = window.location.search;
+      }
+      if (uri.indexOf("?") === -1) {
+        return {};
+      }
+      query = uri.slice(1);
+      params = query.split("&");
+      i = 0;
+      while (i < params.length) {
+        parameter = params[i].split("=");
+        result[parameter[0]] = parameter[1];
+        i++;
+      }
+      return result;
+    }
+  };
+
+
+
+  var uid = Request.parameter('uid');
+  var pos = Request.parameter('pos');
+  var tobepaid = Request.parameter('priceadd');
+  var aid = Request.parameter('aid');
+  
+
+  /*
+  var item_name = Request.parameter('item_name');
+  var item_count = Request.parameter('item_count');
+  var price = Request.parameter('price');
+  var stall1 = Request.parameter('stall1');
+  var stall2 = Request.parameter('stall2');
+  var stall3 = Request.parameter('stall3');
+  var email = Request.parameter('email');
+  var mobile = Request.parameter('mobile');
+  var hostel = Request.parameter('hostel');
+  var block = Request.parameter('block');
+  var room = Request.parameter('room');
+  var position = Request.parameter('position');
+*/
+
+  
+
+ 
+  function fun(){
+    var typestat;
+    if(aid == "null"){
+      typestat = "Cancelled";
+      console.log("NULL");
+      $("#stat").text("Cancelled Successfully");
+      $("#orders").text("Your order with OrderID : "+uid+pos+" was cancelled Successfully based on your request"); 
+      $("#boxes").hide();
+    }
+    else{
+      typestat = "Deliveried";
+      $("#stat").text("Deliveried");
+      $("#orders").text("OrderID : "+uid+pos+" was Deliveried Successfully");
+    }
+    var ref = firebase.database().ref('1/orders/'+uid+'/'+pos);
+    ref.remove();
+
+    var ref = firebase.database().ref('1/orders/'+uid+'/'+pos);
+    ref.remove();
+    var d = new Date();
+    var month = d.getMonth() + 1;
+    var date = d.getDate();
+    var year = d.getFullYear();
+
+    var timeofday = date.toString() + month.toString() + year.toString();
+    console.log(timeofday);
+    var ref123 = firebase.database().ref('4/stats/'+timeofday);
+
+        ref123.on('value', gotdata, errData);
+
+        function gotdata(data){
+          var orders = data.val();
+          var ids = Object.keys(orders);
+          var position = ids.length;
+            ref123.child(parseInt(position)).set({
+              uid : uid,
+              aid : aid,
+              tobepaid : tobepaid,
+              typestat : typestat,
+          });
+        }
+  }
+
+function errData(err){
+      console.log(err);
+  }
+  
+  
+</script>
+</body>
+</html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>

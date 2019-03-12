@@ -1,0 +1,88 @@
+<!--http://localhost/websites/firebase/public/create_agent.html?aid=24&name=rpsnaik&email=naik.rpsn@gmail.com&mobile=8309551486&password=Naik1999-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet"> 
+    <style>
+      body{
+        font-family: 'Nunito', sans-serif;
+      }
+    </style>
+</head>
+<body>
+    
+    <h3 style=" text-align: center; margin-top:100px;">Please wait while the details are transfering to the firebase cloud database...</h3>
+    
+<script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-database.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCfDQPGxr-NEfBDOR-a-M3j8lN7bBCOcXY",
+    authDomain: "recipers-2019.firebaseapp.com",
+    databaseURL: "https://recipers-2019.firebaseio.com",
+    projectId: "recipers-2019",
+    storageBucket: "recipers-2019.appspot.com",
+    messagingSenderId: "635738732856"
+  };
+  firebase.initializeApp(config);
+</script>
+<script>
+  var Request = {
+    parameter: function(name) {
+      return this.parameters()[name];
+    },
+    parameters: function(uri) {
+      var i, parameter, params, query, result;
+      result = {};
+      if (!uri) {
+        uri = window.location.search;
+      }
+      if (uri.indexOf("?") === -1) {
+        return {};
+      }
+      query = uri.slice(1);
+      params = query.split("&");
+      i = 0;
+      while (i < params.length) {
+        parameter = params[i].split("=");
+        result[parameter[0]] = parameter[1];
+        i++;
+      }
+      return result;
+    }
+  };
+
+  var aid = Request.parameter('aid');
+  var name = Request.parameter('name');
+  var email = Request.parameter('email');
+  var mobile = Request.parameter('mobile');
+  var password = Request.parameter('password');
+  var tobepaid = Request.parameter('tobepaid');
+
+
+fun();
+function fun(){
+    console.log(firebase);
+    var database = firebase.database();
+    var ref = database.ref('2/agents');
+    ref.child(aid).set({
+        name: name,
+        email: email,
+        mobile: mobile,
+        password: password,
+    });
+    var ref2 = database.ref('4/payments_by_agents');
+    ref2.child(aid).set({
+        aid:aid,
+        tobepaid: tobepaid,
+    });
+}
+  
+</script>
+</body>
+</html>

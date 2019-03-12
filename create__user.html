@@ -1,0 +1,101 @@
+<!--http://localhost/websites/firebase/index.php?&uid=23&name=rpsnaik&email=naik.rpsn@gmail.com&mobile=8309551486&hostel=BH3&block=B&room=903&submitted=true-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet"> 
+    <style>
+      body{
+        font-family: 'Nunito', sans-serif;
+      }
+    </style>
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.js"
+    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous"></script>
+</head>
+<body>
+    
+    <h3 id="resof" style=" text-align: center; margin-top:100px;">Signing Up...</h3>
+    
+<script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-database.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCfDQPGxr-NEfBDOR-a-M3j8lN7bBCOcXY",
+    authDomain: "recipers-2019.firebaseapp.com",
+    databaseURL: "https://recipers-2019.firebaseio.com",
+    projectId: "recipers-2019",
+    storageBucket: "recipers-2019.appspot.com",
+    messagingSenderId: "635738732856"
+  };
+  firebase.initializeApp(config);
+</script>
+<script>
+  var Request = {
+    parameter: function(name) {
+      return this.parameters()[name];
+    },
+    parameters: function(uri) {
+      var i, parameter, params, query, result;
+      result = {};
+      if (!uri) {
+        uri = window.location.search;
+      }
+      if (uri.indexOf("?") === -1) {
+        return {};
+      }
+      query = uri.slice(1);
+      params = query.split("&");
+      i = 0;
+      while (i < params.length) {
+        parameter = params[i].split("=");
+        result[parameter[0]] = parameter[1];
+        i++;
+      }
+      return result;
+    }
+  };
+
+
+
+  var uid = Request.parameter('uid');
+  var name = Request.parameter('name');
+  var email = Request.parameter('email');
+  var mobile = Request.parameter('mobile');
+  var hostel = Request.parameter('hostel');
+  var block = Request.parameter('block');
+  var room = Request.parameter('room');
+
+  console.log(block);
+
+
+fun();
+function fun(){
+    console.log(firebase);
+    var database = firebase.database();
+    var ref = database.ref('0/users');
+    ref.child(uid).set({
+        name: name,
+        email: email,
+        mobile: mobile,
+        hostel: hostel,
+        block: block,
+        room: room,
+    }, function(error){
+      if(error){
+        document.getElementById('resof').value = "Check your Network Connection and Try Again";
+      }
+      else{
+        window.location.href = "https://recipers-2019.firebaseapp.com/during_signupaddingorders.html?&uid="+uid+"&cus_name=null&item_name=null&item_count=null&price=null&stall1=null&stall2=null&stall3=null&email=null&mobile=null&hostel=null&block=null&room=null&position=0&priceadd=10&submitted=true";
+      }
+    });
+}
+  
+</script>
+</body>
+</html>

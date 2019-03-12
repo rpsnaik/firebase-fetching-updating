@@ -1,0 +1,487 @@
+<!--https://recipers-2019.firebaseapp.com/adding_orders.html?&uid=23&cus_name=rpsnaik&item_name=thali&item_count=3&price=180&stall1=vascos&stall2=foodie&stall3=fortune&email=naik.rpsn@gmail.com&mobile=8309551486&hostel=BH3&block=B&room=903&position=5&submitted=true-->
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function(){
+            $('.collapsible').collapsible();
+        });
+    </script>
+</head>
+<body>
+<style>
+    body{
+        font-family:sans-serif;
+    }
+    p{
+        padding:5px;
+    }
+</style>
+
+<div class="row">
+    <div class="col s12 m6">
+      <div class="card blue darken-1">
+        <div class="card-content white-text">
+          <span id="main1" class="card-title">Card Title</span>
+          <p>No.of Items : <span id="count1"></span></p>
+          <h5>Contact : </h5>
+          <p>Name : <span id="name1"></span></p>
+          <p><i class="material-icons">local_phone</i> <span id="mobile1"></span> </p>
+          <p><i class="material-icons">email</i> <span id="email1"></span> </p>
+          <p><i class="material-icons">home</i> <span id="add1"></span> </p>
+          <p>Stall Preferences : <br> <span id="pre1"></span> </p>
+          <p>UID : <span id="uid1"></span></p>
+          <br>
+          <p>Status : <span id="status1"></span></p>
+        </div>
+        <div class="card-action">
+          <a class="white-text" href="#">Cost : <span id="cost1"></span>INR </a>
+          <button class="btn" >CANCEL ORDER</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col s12 m6">
+      <div class="card blue darken-1">
+        <div class="card-content white-text">
+          <span id="main2" class="card-title">Card Title</span>
+          <p>No.of Items : <span id="count2"></span></p>
+          <h5>Contact : </h5>
+          <p>Name : <span id="name2"></span></p>
+          <p><i class="material-icons">local_phone</i> <span id="mobile2"></span> </p>
+          <p><i class="material-icons">email</i> <span id="email2"></span> </p>
+          <p><i class="material-icons">home</i> <span id="add2"></span> </p>
+          <p>Stall Preferences : <br> <span id="pre2"></span> </p>
+          <p>UID : <span id="uid2"></span></p>
+          <br>
+          <p>Status : <span id="status2"></span></p>
+        </div>
+        <div class="card-action">
+          <a class="white-text" href="#">Cost : <span id="cost2"></span>INR </a>
+          <button class="btn" >CANCEL ORDER</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col s12 m6">
+      <div class="card blue darken-1">
+        <div class="card-content white-text">
+          <span id="main3" class="card-title">Card Title</span>
+          <p>No.of Items : <span id="count3"></span></p>
+          <h5>Contact : </h5>
+          <p>Name : <span id="name3"></span></p>
+          <p><i class="material-icons">local_phone</i> <span id="mobile3"></span> </p>
+          <p><i class="material-icons">email</i> <span id="email3"></span> </p>
+          <p><i class="material-icons">home</i> <span id="add3"></span> </p>
+          <p>Stall Preferences : <br> <span id="pre3"></span> </p>
+          <p>UID : <span id="uid3"></span></p>
+          <br>
+          <p>Status : <span id="status3"></span></p>
+        </div>
+        <div class="card-action">
+          <a class="white-text" href="#">Cost : <span id="cost3"></span>INR </a>
+          <button class="btn" >CANCEL ORDER</button>  
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col s12 m6">
+      <div class="card blue darken-1">
+        <div class="card-content white-text">
+          <span id="main4" class="card-title">Card Title</span>
+          <p>No.of Items : <span id="count4"></span></p>
+          <h5>Contact : </h5>
+          <p>Name : <span id="name4"></span></p>
+          <p><i class="material-icons">local_phone</i> <span id="mobile4"></span> </p>
+          <p><i class="material-icons">email</i> <span id="email4"></span> </p>
+          <p><i class="material-icons">home</i> <span id="add4"></span> </p>
+          <p>Stall Preferences : <br> <span id="pre4"></span> </p>
+          <p>UID : <span id="uid4"></span></p>
+          <br>
+          <p>Status : <span id="status4"></span></p>
+        </div>
+        <div class="card-action">
+          <a class="white-text" href="#">Cost : <span id="cost4"></span>INR </a>
+          <button class="btn" >CANCEL ORDER</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col s12 m6">
+      <div class="card blue darken-1">
+        <div class="card-content white-text">
+          <span id="main5" class="card-title">Card Title</span>
+          <p>No.of Items : <span id="count5"></span></p>
+          <h5>Contact : </h5>
+          <p>Name : <span id="name5"></span></p>
+          <p><i class="material-icons">local_phone</i> <span id="mobile5"></span> </p>
+          <p><i class="material-icons">email</i> <span id="email5"></span> </p>
+          <p><i class="material-icons">home</i> <span id="add5"></span> </p>
+          <p>Stall Preferences : <br> <span id="pre5"></span> </p>
+          <p>UID : <span id="uid5"></span></p>
+          <br>
+          <p>Status : <span id="status5"></span></p>
+        </div>
+        <div class="card-action">
+          <a class="white-text" href="#">Cost : <span id="cost5"></span>INR </a>
+          <button class="btn" >CANCEL ORDER</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col s12 m6">
+      <div class="card blue darken-1">
+        <div class="card-content white-text">
+          <span id="main6" class="card-title">Card Title</span>
+          <p>No.of Items : <span id="count6"></span></p>
+          <h5>Contact : </h5>
+          <p>Name : <span id="name6"></span></p>
+          <p><i class="material-icons">local_phone</i> <span id="mobile6"></span> </p>
+          <p><i class="material-icons">email</i> <span id="email6"></span> </p>
+          <p><i class="material-icons">home</i> <span id="add6"></span> </p>
+          <p>Stall Preferences : <br> <span id="pre6"></span> </p>
+          <p>UID : <span id="uid6"></span></p>
+          <br>
+          <p>Status : <span id="status6"></span></p>
+        </div>
+        <div class="card-action">
+          <a class="white-text" href="#">Cost : <span id="cost6"></span>INR </a>
+          <button class="btn" >CANCEL ORDER</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col s12 m6">
+      <div class="card blue darken-1">
+        <div class="card-content white-text">
+          <span id="main7" class="card-title"></span>
+          <p><span id="count7"></span></p>
+          <h5></h5>
+          <p><span id="name7"></span></p>
+          <p><span id="mobile7"></span> </p>
+          <p><i class="material-icons">email</i> <span id="email7"></span> </p>
+          <p><i class="material-icons">home</i> <span id="add7"></span> </p>
+          <p>Stall Preferences : <br> <span id="pre7"></span> </p>
+          <p>UID : <span id="uid7"></span></p>
+          <br>
+          <p>Status : <span id="status7"></span></p>
+        </div>
+        <div class="card-action">
+          <a class="white-text" href="#">Cost : <span id="cost7"></span>INR </a>
+          <button class="btn" >CANCEL ORDER</button>
+        </div>
+      </div>
+    </div>
+  </div>
+    
+<script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-database.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCfDQPGxr-NEfBDOR-a-M3j8lN7bBCOcXY",
+    authDomain: "recipers-2019.firebaseapp.com",
+    databaseURL: "https://recipers-2019.firebaseio.com",
+    projectId: "recipers-2019",
+    storageBucket: "recipers-2019.appspot.com",
+    messagingSenderId: "635738732856"
+  };
+  firebase.initializeApp(config);
+</script>
+<script>
+
+  
+
+
+  var Request = {
+    parameter: function(name) {
+      return this.parameters()[name];
+    },
+    parameters: function(uri) {
+      var i, parameter, params, query, result;
+      result = {};
+      if (!uri) {
+        uri = window.location.search;
+      }
+      if (uri.indexOf("?") === -1) {
+        return {};
+      }
+      query = uri.slice(1);
+      params = query.split("&");
+      i = 0;
+      while (i < params.length) {
+        parameter = params[i].split("=");
+        result[parameter[0]] = parameter[1];
+        i++;
+      }
+      return result;
+    }
+  };
+
+
+
+  var uid = Request.parameter('uid');
+  var cus_name = Request.parameter('cus_name');
+  var item_name = Request.parameter('item_name');
+  var item_count = Request.parameter('item_count');
+  var price = Request.parameter('price');
+  var stall1 = Request.parameter('stall1');
+  var stall2 = Request.parameter('stall2');
+  var stall3 = Request.parameter('stall3');
+  var email = Request.parameter('email');
+  var mobile = Request.parameter('mobile');
+  var hostel = Request.parameter('hostel');
+  var block = Request.parameter('block');
+  var room = Request.parameter('room');
+  var position = Request.parameter('position');
+
+
+  fun();
+  function fun(){
+    var ref = firebase.database().ref('1/orders/'+uid);
+    ref.on('value', gotdata, errData);
+  }
+
+
+  function gotdata(data){
+      var orders = data.val();
+      console.log(orders);
+      var ids = Object.keys(orders);
+      for (var i = 0; i <= ids.length; i++){
+          console.log(orders[i]);
+          var title = orders[i]['item_name'];
+          var name = orders[i]['cus_name'];
+          var count = orders[i]['item_count'];
+          var phone = orders[i]['mobile'];
+          var email = orders[i]['email'];
+          var add = "Hostel-"+orders[i]['hostel']+" "+orders[i]['block']+"-Block"+" "+orders[i]['room'];
+          var pre = "Stall-1 : "+orders[i]['stall1']+"<br>"+"Stall-2 : "+orders[i]['stall2']+"<br>"+"Stall-3 : "+orders[i]['stall3'];
+          var price = orders[i]['price'];
+          var uid = orders[i]['uid'];
+          var status = orders[i]['status'];
+          if(uid == null){
+            $('#name'+i).hide();
+            $('#main'+i).hide();
+            $('#count'+i).hide();
+            $('#mobile'+i).hide();
+            $('#email'+i).hide();
+            $("#add"+i).hide();
+            $("#pre"+i).hide();
+            $("#cost"+i).hide();
+            $("#uid"+i).hide();
+            $("#status"+i).hide();
+          }
+          else{
+            $('#name'+i).html("Name : "+name);
+            $('#main'+i).html(title);
+            $('#count'+i).html("No.of Items : "+count); 
+            $('#mobile'+i).html(" <p><i class='material-icons'>local_phone</i> <span id='mobile7'></span> </p> "+phone);
+            $('#email'+i).html(email);
+            $("#add"+i).html(add);
+            $("#pre"+i).html(pre);
+            $("#cost"+i).html(price);
+            $("#uid"+i).html(uid);
+            $("#status"+i).html(status);
+          }
+      }
+  }
+
+  function errData(err){
+      console.log(err);
+  }
+
+  
+  
+</script>
+</body>
+</html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+-->
+
+<!--https://recipers-2019.firebaseapp.com/adding_orders.html?&uid=23&cus_name=rpsnaik&item_name=thali&item_count=3&price=180&stall1=vascos&stall2=foodie&stall3=fortune&email=naik.rpsn@gmail.com&mobile=8309551486&hostel=BH3&block=B&room=903&position=5&submitted=true-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet"> 
+    <style>
+      body{
+        font-family: 'Nunito', sans-serif;
+      }
+    </style>
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function(){
+            $('.collapsible').collapsible();
+        });
+    </script>
+</head>
+<body>
+<style>
+    body{
+        font-family: 'Nunito', sans-serif;
+        padding:5px;
+    }
+    p{
+        padding:5px;
+    }
+</style>
+
+<h4 style="text-align:center;">My Orders</h4>
+
+<p id="orders">  
+      <div id="cir" class="progress">
+         <div class="indeterminate blue"></div> 
+      </div>
+</p>
+
+
+    
+<script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-database.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCfDQPGxr-NEfBDOR-a-M3j8lN7bBCOcXY",
+    authDomain: "recipers-2019.firebaseapp.com",
+    databaseURL: "https://recipers-2019.firebaseio.com",
+    projectId: "recipers-2019",
+    storageBucket: "recipers-2019.appspot.com",
+    messagingSenderId: "635738732856"
+  };
+  firebase.initializeApp(config);
+</script>
+<script>
+
+  
+
+
+  var Request = {
+    parameter: function(name) {
+      return this.parameters()[name];
+    },
+    parameters: function(uri) {
+      var i, parameter, params, query, result;
+      result = {};
+      if (!uri) {
+        uri = window.location.search;
+      }
+      if (uri.indexOf("?") === -1) {
+        return {};
+      }
+      query = uri.slice(1);
+      params = query.split("&");
+      i = 0;
+      while (i < params.length) {
+        parameter = params[i].split("=");
+        result[parameter[0]] = parameter[1];
+        i++;
+      }
+      return result;
+    }
+  };
+
+
+
+  var uid = Request.parameter('uid');
+/*
+  var cus_name = Request.parameter('cus_name');
+  var item_name = Request.parameter('item_name');
+  var item_count = Request.parameter('item_count');
+  var price = Request.parameter('price');
+  var stall1 = Request.parameter('stall1');
+  var stall2 = Request.parameter('stall2');
+  var stall3 = Request.parameter('stall3');
+  var email = Request.parameter('email');
+  var mobile = Request.parameter('mobile');
+  var hostel = Request.parameter('hostel');
+  var block = Request.parameter('block');
+  var room = Request.parameter('room');
+  var position = Request.parameter('position');
+*/
+var time = new Date();
+  console.log(time);
+  fun();
+  function fun(){
+    var ref = firebase.database().ref('1/orders/'+uid);
+    ref.on('value', gotdata, errData);
+  }
+
+
+  function gotdata(data){
+      var orders = data.val();
+      var ids = Object.keys(orders);
+      if(ids.length <= 1){
+              console.log("Empty");
+              $("#orders").html("<h5 style='text-align:center'>You are not having any orders</h5>");
+              $("#cir").hide();
+        }
+        else{
+          console.log("Food Items are here");
+        }
+      console.log(ids.length);
+      for(var i=1;i<ids.length;i++){
+          console.log(ids[i]);
+          var ref2 = firebase.database().ref('1/orders/'+uid+'/'+ids[i]);
+          ref2.on('value', gotdata1, errData);
+          function gotdata1(data2){
+            var ordersSublist = data2.val();
+            var keys2 = Object.keys(ordersSublist);
+            var item_name = ordersSublist['item_name'];
+            var cus_name = ordersSublist['cus_name'];
+            var item_count = ordersSublist['item_count'];
+            var mobile = ordersSublist['mobile'];
+            var email = ordersSublist['email'];
+            var price = ordersSublist['price'];
+            var stalls = "1."+ordersSublist['stall1']+"<br>"+"2."+ordersSublist['stall2']+"<br>"+"3."+ordersSublist['stall3']+"<br>";
+            var status = ordersSublist['status'];
+            var uid = ordersSublist['uid'];  
+            var address = ordersSublist['hostel']+" "+ordersSublist['block']+" "+ordersSublist['room'];
+            $("#orders").append('<div class="row"><div class="col s12 m6"><div class="card darken-4 black-text"><div class="card-content black-text"><span class="card-title"><i class="material-icons">room_service</i> '+item_name+'<span class="new badge blue" data-badge-caption="">Quantity : '+item_count+'</span>'+'</span><p>Name : '+cus_name+'<br>Mobile Number : '+mobile+'<br>Email ID : '+email+'<br><p>Order verified by : </p><img width="60%" src="./recipers.png"><br><br>Stall Preferences : <br>'+stalls+'<br>Status : '+status+'<br>Address : '+address+'</p><p>Order Placed at : '+ordersSublist['time']+'</p><p>Order ID : '+ordersSublist['uid']+ids[i]+'</p></div><div class="card-action"><a class="" style="font-weight:700" href="#">Payable Amount : '+price+'INR'+'</a><a href="./order_done_alert.html?uid='+ordersSublist['uid']+'&pos='+ids[i]+'&priceadd='+ordersSublist['priceadd']+'&aid=null"><button class="btn">Cancel Order</button></a></div></div>');
+            $('.progress').hide();
+        }
+      }
+  }
+
+
+  function errData(err){
+      console.log(err);
+  }
+
+  
+  
+</script>
+</body>
+</html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>

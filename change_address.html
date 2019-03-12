@@ -1,0 +1,145 @@
+<!--http://localhost/websites/firebase/public/finding_orders.html?&uid=21&cus_name=rpsnaik&item_name=thali&item_count=3&price=180&stall1=vaos&scstall2=foodie&stall3=fortune&email=naik.rpsn@gmail.com&mobile=8309551486&hostel=BH3&block=B&room=903&position=5&priceadd=10&submitted=true-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet"> 
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.js"
+    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous"></script>    
+    <style>
+     body{
+       background-color: #f1f1f1;
+       font-family: 'Nunito', sans-serif;
+     }
+    </style>
+</head>
+<body>
+    
+  <section class="container">
+      <h4 style="text-align: center">Change Address</h4>
+      <br>
+    <div class="row">
+        <form class="col s12">
+          <div class="row">
+            <div class="input-field col s6">
+              <input  id="hostel" type="text" class="validate">
+              <label for="first_name">Hostel</label>
+            </div>
+            <div class="input-field col s6">
+              <input id="block" type="text" class="validate">
+              <label for="block">Block</label>
+            </div>
+          </div>
+
+          <div class="row">
+                <div class="input-field col s12">
+                  <input id="room" type="number" class="validate">
+                  <label for="room">Room No</label>
+                </div>
+              </div>
+          
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="mobile" type="number" class="validate">
+              <label for="mobile">Mobile</label>
+            </div>
+          </div>
+
+          <div class="row">
+                <div class="input-field col s12">
+                  <input id="name" type="text" class="validate">
+                  <label for="name">Name</label>
+                </div>
+              </div>
+        </form>
+      </div>
+
+      <button onclick="fun()" class="btn" style="text-align: center">Save Details</button>
+  </section>
+    
+<script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-database.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCfDQPGxr-NEfBDOR-a-M3j8lN7bBCOcXY",
+    authDomain: "recipers-2019.firebaseapp.com",
+    databaseURL: "https://recipers-2019.firebaseio.com",
+    projectId: "recipers-2019",
+    storageBucket: "recipers-2019.appspot.com",
+    messagingSenderId: "635738732856"
+  };
+  firebase.initializeApp(config);
+</script>
+<script>
+  var Request = {
+    parameter: function(name) {
+      return this.parameters()[name];
+    },
+    parameters: function(uri) {
+      var i, parameter, params, query, result;
+      result = {};
+      if (!uri) {
+        uri = window.location.search;
+      }
+      if (uri.indexOf("?") === -1) {
+        return {};
+      }
+      query = uri.slice(1);
+      params = query.split("&");
+      i = 0;
+      while (i < params.length) {
+        parameter = params[i].split("=");
+        result[parameter[0]] = parameter[1];
+        i++;
+      }
+      return result;
+    }
+  };
+
+ 
+
+
+
+
+
+function fun(){
+    var uid = Request.parameter('uid');
+    var cus_name = document.getElementById('name').value;
+    var email = Request.parameter('email');
+    var mobile = document.getElementById('mobile').value;
+    var hostel = document.getElementById('hostel').value;
+    var block = document.getElementById('block').value;
+    var room = document.getElementById('room').value;
+
+    if((uid == "") || (cus_name == "") || (email == "") || (mobile == "") || (hostel == "") || (block == "") || (room == "")){
+        M.toast({html: 'Incomplete Entities'});
+    }
+    else{
+        console.log(firebase);
+        var database = firebase.database();
+        var ref = database.ref('0/users');
+        ref.child(uid).set({
+            name: cus_name,
+            email: email,
+            mobile: mobile,
+            hostel: hostel,
+            block: block,
+            room: room,
+        });
+    M.toast({html: 'Details Saved Successfully'});
+    }
+}
+
+
+</script>
+</body>
+</html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
